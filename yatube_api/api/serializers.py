@@ -1,5 +1,9 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from posts.models import Post, Group, Comment
+
+from posts.models import Comment, Group, Post
+
+User = get_user_model()
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -9,7 +13,10 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'text', 'author', 'image', 'group', 'pub_date')
+        fields = (
+            'id', 'text', 'author', 'image',
+            'group', 'pub_date'
+        )
         read_only_fields = ('author',)
 
 
